@@ -25,8 +25,8 @@ answers = [
 correct_answers_index = [1, 2, 0, 3, 1]
 
 # Genera tuplas o "grupos" conformados por pregunta, sus opciones e indice de la respuesta correcta,
-#  y almacena 3 grupos randoms
-questions_to_ask = random.choices(list(zip(questions, answers, correct_answers_index)), k=3)
+#  y almacena 3 grupos randoms diferentes.
+questions_to_ask = random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
 puntaje = 0.0
 # El usuario deberá contestar 3 preguntas
 for question,answers,correct_index in questions_to_ask:
