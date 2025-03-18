@@ -1,3 +1,4 @@
+import string
 # Creación del inventario
 inventario = {}
 
