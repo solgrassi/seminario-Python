@@ -61,4 +61,6 @@ for question,answers,correct_index in questions_to_ask:
                 sys.exit(1)
  # Se imprime un blanco al final de la pregunta
     print()
+if (puntaje <0):
+    puntaje = 0
 print("Jugador/a, tu puntaje final es de: ", puntaje, "!")
