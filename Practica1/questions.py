@@ -63,4 +63,4 @@ for question,answers,correct_index in questions_to_ask:
     print()
 if (puntaje <0):
     puntaje = 0
-print("Jugador/a, tu puntaje final es de: ", puntaje, "!")
+print(f"Jugador/a, tu puntaje final es de: {puntaje}!")
