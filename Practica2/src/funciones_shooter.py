@@ -2,31 +2,32 @@ def  calcular_puntos(kills,assist,death):
     """
     Calcula el puntaje de un jugador basado en kills, asistencias y muertes.
     """
-    return ((kills * 3 + assist *2) + (-1 if death else 0))
+    return ((kills * 3 + assist * 1) - (1 if death else 0))
 
 
 def procesar_ronda (infoJugadores, infoGlobal):
     """
     Procesa una ronda para determinar las estadisticas y MVP. 
-    Devuelve una tupla con los jugadores y sus datos correspondientes.
+    Devuelve una diccionario con los jugadores y sus datos correspondientes
+    actualizados (acumulados con las rondas anteriores).
     """
     jugadores = []
-    for nombre, datos in infoJugadores:
+    for nombre, datos in infoJugadores.items(): 
         jugador = {
-            'Jugador': nombre,
-            'Kills': datos['kills'],
-            'Asistencias' : datos['assists'],
-            'Muertes' : datos['deaths'],
-            'Puntos' : calcular_puntos(datos['kills'], datos['assists'], datos['deaths']),
-            'MVPs' : 0
+            'name': nombre,
+            'kills': datos['kills'],
+            'assists' : datos['assists'],
+            'deaths' : datos['deaths'],
+            'points' : calcular_puntos(datos['kills'], datos['assists'], datos['deaths']),
+            'mvps' : 0
         }
-    #agrego a la lista el jugador procesado
-    jugadores.append(jugador)
+        #agrego a la lista el jugador procesado
+        jugadores.append(jugador)
     #Ordeno la lista segun los puntos totales, en orden descendiente(reverse)
     jugadores.sort(key = lambda x: x['points'], reverse=True)
     # El primer jugador sera el MVP
-    jugadores[0]['MVPs'] += 1
-
+    jugadores[0]['mvps'] += 1
+    
     for jugador in jugadores:
         if jugador['name'] not in infoGlobal:
             infoGlobal[jugador['name']] = {
@@ -45,6 +46,4 @@ def procesar_ronda (infoJugadores, infoGlobal):
             estadisticas['points'] += jugador['points']
             estadisticas['mvps'] += jugador['mvps']
     return infoGlobal
-
-
 
