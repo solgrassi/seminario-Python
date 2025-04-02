@@ -47,3 +47,22 @@ def procesar_ronda (infoJugadores, infoGlobal):
             estadisticas['mvps'] += jugador['mvps']
     return infoGlobal
 
+
+def imprimir_ronda (infoGlobal,num):
+    """
+    Imprime la ronda con todos los jugadores y los valores correspondientes
+    a cada uno.
+    """
+    print(f"Ronda numero {num}: ")
+    #Imprimir el nombre de la columna alineado a la izquiera y ocupa tantos
+    #espacios como este indicado. 
+    print(f"{'Jugador':<10} {'Kills':<10} {'Asistencias':<12} {'Muertes':<8} {'MVPs':<5} {'Puntos':<6}" )
+    print("----------------------------------------------------")
+    # Ordenar los jugadores en orden decreciente por puntos totales.
+    jugadoresOrdenados = sorted(infoGlobal.items(), key=lambda x: x[1]['points'], reverse=True)
+    #Imprimir tabla iterando sobre cada jugador
+    for nombre, datos in jugadoresOrdenados:
+        print(
+            f"{nombre:<10} {datos['kills']:<10} {datos['assists']:<12} {datos['deaths']:<8} {datos['mvps']:<5} {datos['points']:<6}"
+        )
+    print()
