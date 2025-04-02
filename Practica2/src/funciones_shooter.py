@@ -5,20 +5,22 @@ def  calcular_puntos(kills,assist,death):
     return ((kills * 3 + assist * 1) - (1 if death else 0))
 
 
-def procesar_ronda (infoJugadores, infoGlobal):
+def procesar_ronda (info_jugadores, info_global):
     """
     Procesa una ronda para determinar las estadisticas y MVP. 
     Devuelve una diccionario con los jugadores y sus datos correspondientes
     actualizados (acumulados con las rondas anteriores).
     """
     jugadores = []
-    for nombre, datos in infoJugadores.items(): 
+    for nombre, datos in info_jugadores.items(): 
         jugador = {
             'name': nombre,
             'kills': datos['kills'],
             'assists' : datos['assists'],
             'deaths' : datos['deaths'],
-            'points' : calcular_puntos(datos['kills'], datos['assists'], datos['deaths']),
+            'points' : calcular_puntos(
+                datos['kills'], datos['assists'], datos['deaths']
+            ),
             'mvps' : 0
         }
         #agrego a la lista el jugador procesado
@@ -29,8 +31,8 @@ def procesar_ronda (infoJugadores, infoGlobal):
     jugadores[0]['mvps'] += 1
     
     for jugador in jugadores:
-        if jugador['name'] not in infoGlobal:
-            infoGlobal[jugador['name']] = {
+        if jugador['name'] not in info_global:
+            info_global[jugador['name']] = {
                 'kills': jugador['kills'],
                 'assists': jugador['assists'],
                 'deaths': jugador['deaths'],
@@ -39,16 +41,16 @@ def procesar_ronda (infoJugadores, infoGlobal):
             }
         else:
             # Apunto a un jugador para actualizar los datos
-            estadisticas = infoGlobal[jugador['name']]
+            estadisticas = info_global[jugador['name']]
             estadisticas['kills'] += jugador['kills']
             estadisticas['assists'] += jugador['assists']
             estadisticas['deaths'] += jugador['deaths']
             estadisticas['points'] += jugador['points']
             estadisticas['mvps'] += jugador['mvps']
-    return infoGlobal
+    return info_global
 
 
-def imprimir_ronda (infoGlobal,num):
+def imprimir_ronda (info_global,num):
     """
     Imprime la ronda con todos los jugadores y los valores correspondientes
     a cada uno.
@@ -56,13 +58,19 @@ def imprimir_ronda (infoGlobal,num):
     print(f"Ronda numero {num}: ")
     #Imprimir el nombre de la columna alineado a la izquiera y ocupa tantos
     #espacios como este indicado. 
-    print(f"{'Jugador':<10} {'Kills':<10} {'Asistencias':<12} {'Muertes':<8} {'MVPs':<5} {'Puntos':<6}" )
-    print("----------------------------------------------------")
+    print(
+        f"{'Jugador':<10} {'Kills':<8} {'Asistencias':<12} {'Muertes':<8}"
+        f"{'MVPs':<5} {'Puntos':<6}" 
+    )
+    print("-" * 56)
     # Ordenar los jugadores en orden decreciente por puntos totales.
-    jugadoresOrdenados = sorted(infoGlobal.items(), key=lambda x: x[1]['points'], reverse=True)
+    jugadoresOrdenados = sorted(
+        info_global.items(), key=lambda x: x[1]['points'], reverse=True
+    )
     #Imprimir tabla iterando sobre cada jugador
     for nombre, datos in jugadoresOrdenados:
         print(
-            f"{nombre:<10} {datos['kills']:<10} {datos['assists']:<12} {datos['deaths']:<8} {datos['mvps']:<5} {datos['points']:<6}"
+            f"{nombre:<10} {datos['kills']:<8} {datos['assists']:<12}"
+            f"{datos['deaths']:<8} {datos['mvps']:<5} {datos['points']:<6}"
         )
     print()
