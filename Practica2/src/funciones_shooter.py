@@ -1,6 +1,12 @@
 def  calcular_puntos(kills,assist,death):
     """
     Calcula el puntaje de un jugador basado en kills, asistencias y muertes.
+    Parametros:
+    kills - int: numero de kills
+    assist - int: numero de asistencias
+    death - int: si murio o no
+    Retorno:
+    puntos (int) totales.
     """
     return ((kills * 3 + assist * 1) - (1 if death else 0))
 
@@ -8,6 +14,10 @@ def  calcular_puntos(kills,assist,death):
 def procesar_ronda (info_jugadores, info_global):
     """
     Procesa una ronda para determinar las estadisticas y MVP. 
+    Parametros:
+    info_jugadores - dic: una ronda del juego con todos los jugadores.
+    info_global- dic: valores acumulados durante las rondas.
+    Retorno:
     Devuelve una diccionario con los jugadores y sus datos correspondientes
     actualizados (acumulados con las rondas anteriores).
     """
@@ -53,7 +63,12 @@ def procesar_ronda (info_jugadores, info_global):
 def imprimir_ronda (info_global,num):
     """
     Imprime la ronda con todos los jugadores y los valores correspondientes
-    a cada uno.
+    a cada uno en una tabla por ronda.
+    Parametros:
+    info_global -dic: estadisticas acumuladas de las rondas procesadas.
+    num - int : numero de ronda
+    Retorno:
+    none
     """
     print(f"Ronda numero {num}: ")
     #Imprimir el nombre de la columna alineado a la izquiera y ocupa tantos
