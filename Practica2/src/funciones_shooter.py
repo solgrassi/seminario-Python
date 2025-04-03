@@ -18,8 +18,7 @@ def procesar_ronda (info_jugadores, info_global):
     info_jugadores - dic: una ronda del juego con todos los jugadores.
     info_global- dic: valores acumulados durante las rondas.
     Retorno:
-    Devuelve una diccionario con los jugadores y sus datos correspondientes
-    actualizados (acumulados con las rondas anteriores).
+    Devuelve ek nombre del mvp de la ronda
     """
     jugadores = []
     for nombre, datos in info_jugadores.items(): 
@@ -39,6 +38,7 @@ def procesar_ronda (info_jugadores, info_global):
     jugadores.sort(key = lambda x: x['points'], reverse=True)
     # El primer jugador sera el MVP
     jugadores[0]['mvps'] += 1
+    mvp_ronda = jugadores[0]['name']
     
     for jugador in jugadores:
         if jugador['name'] not in info_global:
@@ -57,15 +57,16 @@ def procesar_ronda (info_jugadores, info_global):
             estadisticas['deaths'] += jugador['deaths']
             estadisticas['points'] += jugador['points']
             estadisticas['mvps'] += jugador['mvps']
-    return info_global
+    return mvp_ronda
 
 
-def imprimir_ronda (info_global,num):
+def imprimir_ronda (info_global,num,mvp_ronda):
     """
-    Imprime la ronda con todos los jugadores y los valores correspondientes
-    a cada uno en una tabla por ronda.
+    Imprime cada ronda con todos los jugadores y los valores correspondientes
+    en una tabla.
     Parametros:
     info_global -dic: estadisticas acumuladas de las rondas procesadas.
+    mvp_ronda - string: nombre del mvp de la ronda.
     num - int : numero de ronda
     Retorno:
     none
@@ -88,4 +89,7 @@ def imprimir_ronda (info_global,num):
             f"{nombre:<10} {datos['kills']:<8} {datos['assists']:<12}"
             f"{datos['deaths']:<8} {datos['mvps']:<5} {datos['points']:<6}"
         )
+    print ()
+    print (f"El MVP de la ronda es: {mvp_ronda}")
+    print("-" * 56)
     print()
