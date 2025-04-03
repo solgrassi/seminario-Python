@@ -63,15 +63,11 @@ def procesar_ronda (info_jugadores, info_global):
 def imprimir_ronda (info_global,num,mvp_ronda):
     """
     Imprime cada ronda con todos los jugadores y los valores correspondientes
-<<<<<<< HEAD
-    en una tabla.
-=======
     en una tabla. 
->>>>>>> ecc7a1d1df0c546e65502d36abb7907064f64be9
     Parametros:
     info_global -dic: estadisticas acumuladas de las rondas procesadas.
-    mvp_ronda - string: nombre del mvp de la ronda.
     num - int : numero de ronda
+    mvp_ronda - string: nombre del mvp de la ronda.
     Retorno:
     none
     """
