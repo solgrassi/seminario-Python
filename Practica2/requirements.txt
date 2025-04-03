@@ -1,2 +1,2 @@
 notebook==7.3.3
-ipykernel==6.29.5
+ipykernel==6.29.5 #dependencia de visual Code para ejecutar jupiter
