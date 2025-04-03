@@ -62,8 +62,8 @@ def procesar_ronda (info_jugadores, info_global):
 
 def imprimir_ronda (info_global,num):
     """
-    Imprime la ronda con todos los jugadores y los valores correspondientes
-    a cada uno en una tabla por ronda.
+    Imprime cada ronda con todos los jugadores y los valores correspondientes
+    en una tabla. 
     Parametros:
     info_global -dic: estadisticas acumuladas de las rondas procesadas.
     num - int : numero de ronda
