@@ -30,7 +30,7 @@ def procesar_ronda (info_jugadores, info_global):
             'points' : calcular_puntos(
                 datos['kills'], datos['assists'], datos['deaths']
             ),
-            'mvps' : 0
+            'mvps' : 0 
         }
         #agrego a la lista el jugador procesado
         jugadores.append(jugador)
